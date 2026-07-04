@@ -1,12 +1,32 @@
-// App.tsx
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import CartDrawer from "./components/CartDrawer";
 import type { Product } from "./types/productProps";
 import { productApi } from "./sevices/productApi";
+import { ShoppingBag } from "lucide-react";
 export interface CartItem extends Product {
     quantity: number;
+}
+
+function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="bg-black text-neutral-300 py-10 mt-auto">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="text-white text-lg font-semibold"><ShoppingBag/></p>
+        <p className="text-sm text-neutral-400">
+          &copy; {year} Developed by Yukii
+        </p>
+        <div className="flex gap-6 text-sm">
+          <a href="#" className="hover:text-white transition-colors">Privacy</a>
+          <a href="#" className="hover:text-white transition-colors">Terms</a>
+          <a href="#" className="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </footer>
+  );
 }
 
 export default function App(){
@@ -42,20 +62,29 @@ export default function App(){
             prev.map((item) => (item.id === id ? { ...item, quantity } : item))
         );
     };
-
+    
+    const checkout = () => {
+        setCart([]);
+        setIsCartOpen(false);
+        alert("Item checked out!")
+    }
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-    return(
-        <div>
-            <Navbar cartCount={cartCount} onCartClick={() => setIsCartOpen(true)} />
+  return(
+    <div className="min-h-screen flex flex-col">
+        <Navbar cartCount={cartCount} onCartClick={() => setIsCartOpen(true)} />
+        <div className="flex-1">
             <Home products={products} onAddCart={addToCart} />
-            <CartDrawer
-                isOpen={isCartOpen}
-                onClose={() => setIsCartOpen(false)}
-                cart={cart}
-                onRemove={removeFromCart}
-                onUpdateQuantity={updateQuantity}
-            />
         </div>
-    )
+           <Footer />
+        <CartDrawer
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+            cart={cart}
+            onRemove={removeFromCart}
+            onUpdateQuantity={updateQuantity}
+            checkout={checkout}
+        />
+    </div>
+)
 }

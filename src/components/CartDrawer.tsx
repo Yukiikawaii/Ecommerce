@@ -1,4 +1,3 @@
-// CartDrawer.tsx
 import { X, Trash2, Plus, Minus } from "lucide-react";
 import type { CartItem } from "../App";
 
@@ -8,9 +7,10 @@ interface CartDrawerProps {
     cart: CartItem[];
     onRemove: (id: number) => void;
     onUpdateQuantity: (id: number, quantity: number) => void;
+    checkout: () => void;
 }
 
-export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQuantity }: CartDrawerProps){
+export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQuantity, checkout }: CartDrawerProps){
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     return (
@@ -29,7 +29,7 @@ export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQu
             >
                 <div className="flex items-center justify-between p-4 border-b">
                     <h2 className="text-lg font-semibold">Your Cart</h2>
-                    <button onClick={onClose} aria-label="Close cart">
+                    <button className="cursor-pointer hover:scale-115 transition-all duration-200" onClick={onClose} aria-label="Close cart">
                         <X size={22} />
                     </button>
                 </div>
@@ -47,7 +47,7 @@ export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQu
                                 <p className="text-purple-600 font-semibold text-sm">${item.price}</p>
 
                                 <div className="flex items-center gap-2 mt-1">
-                                    <button onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}>
+                                    <button onClick={() => onUpdateQuantity(item.id, item.quantity)}>
                                         <Minus size={14} />
                                     </button>
                                     <span className="text-sm w-4 text-center">{item.quantity}</span>
@@ -69,7 +69,7 @@ export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQu
                             <span>Total</span>
                             <span>${total.toFixed(2)}</span>
                         </div>
-                        <button className="w-full bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-lg font-medium">
+                        <button onClick={checkout} className="w-full bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-lg font-medium">
                             Checkout
                         </button>
                     </div>

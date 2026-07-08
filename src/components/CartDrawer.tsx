@@ -7,10 +7,11 @@ interface CartDrawerProps {
     cart: CartItem[];
     onRemove: (id: number) => void;
     onUpdateQuantity: (id: number, quantity: number) => void;
+    onDecrease: (id: number) => void;
     checkout: () => void;
 }
 
-export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQuantity, checkout }: CartDrawerProps){
+export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQuantity, checkout, onDecrease }: CartDrawerProps){
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     return (
@@ -47,7 +48,7 @@ export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQu
                                 <p className="text-purple-600 font-semibold text-sm">${item.price}</p>
 
                                 <div className="flex items-center gap-2 mt-1">
-                                    <button onClick={() => onUpdateQuantity(item.id, item.quantity)}>
+                                    <button onClick={() => onDecrease(item.id)}>
                                         <Minus size={14} />
                                     </button>
                                     <span className="text-sm w-4 text-center">{item.quantity}</span>

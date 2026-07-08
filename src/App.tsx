@@ -68,6 +68,16 @@ export default function App(){
         setIsCartOpen(false);
         alert("Item checked out!")
     }
+
+    const onDecrease = (id: number) => {
+        setCart((prev) => (
+            prev.map((item) => 
+                item.id === id
+            ? {...item, quantity: item.quantity - 1}
+            : item
+            )
+        ))
+    }
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return(
@@ -83,6 +93,7 @@ export default function App(){
             cart={cart}
             onRemove={removeFromCart}
             onUpdateQuantity={updateQuantity}
+            onDecrease={onDecrease}
             checkout={checkout}
         />
     </div>

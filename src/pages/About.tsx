@@ -1,5 +1,5 @@
 import { Heart, Truck, ShieldCheck, Users } from "lucide-react";
-
+import { motion } from "motion/react";
 const values = [
     {
         icon: Heart,
@@ -25,9 +25,15 @@ const values = [
 
 export default function About(){
     return(
+      <motion.section
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 1 }}
+    >
         <div className="bg-white">
 
-            {/* Hero */}
+          
             <div className="bg-gradient-to-b from-purple-50 to-white">
                 <div className="max-w-5xl mx-auto px-4 py-20 text-center">
                     <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
@@ -41,7 +47,7 @@ export default function About(){
                 </div>
             </div>
 
-            {/* Values grid */}
+          
             <div className="max-w-6xl mx-auto px-4 py-16">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {values.map(({ icon: Icon, title, description }) => (
@@ -59,7 +65,6 @@ export default function About(){
                 </div>
             </div>
 
-            {/* Story section */}
             <div className="bg-purple-50 py-16">
                 <div className="max-w-3xl mx-auto px-4 text-center">
                     <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
@@ -75,5 +80,6 @@ export default function About(){
             </div>
 
         </div>
+        </motion.section>
     )
 }

@@ -5,6 +5,7 @@ import CartDrawer from "./components/CartDrawer";
 import type { Product } from "./types/productProps";
 import { productApi } from "./sevices/productApi";
 import { ShoppingBag } from "lucide-react";
+import { motion } from "motion/react";
 export interface CartItem extends Product {
     quantity: number;
 }
@@ -76,11 +77,17 @@ export default function App(){
             ? {...item, quantity: item.quantity - 1}
             : item
             )
+            .filter((item) => item.quantity > 0)
         ))
     }
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return(
+        <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
     <div className="min-h-screen flex flex-col">
         <Navbar cartCount={cartCount} onCartClick={() => setIsCartOpen(true)} />
         <div className="flex-1">
@@ -96,6 +103,8 @@ export default function App(){
             onDecrease={onDecrease}
             checkout={checkout}
         />
+        
     </div>
+    </motion.div>
 )
 }

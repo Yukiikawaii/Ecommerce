@@ -13,7 +13,7 @@ interface HomeProps {
 export default function Home({ products, onAddCart }: HomeProps){
     return(
         <div>
-          
+    
             <section id="home" className="bg-gradient-to-b from-purple-50 to-white">
                 <div className="max-w-7xl mx-auto px-4 py-24 sm:py-32 flex flex-col items-center text-center">
                     <div className="flex items-center gap-2 bg-purple-100 text-purple-600 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
@@ -53,5 +53,6 @@ export default function Home({ products, onAddCart }: HomeProps){
                 <Contact />
             </section>
         </div>
+        
     )
 }

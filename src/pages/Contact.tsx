@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
+import { motion } from "motion/react";
 
 export default function Contact(){
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -17,6 +18,12 @@ export default function Contact(){
     };
 
     return(
+          <motion.section
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1 }}
+            >
         <div className="bg-white">
 
             <div className="bg-gradient-to-b from-purple-50 to-white">
@@ -124,5 +131,6 @@ export default function Contact(){
 
             </div>
         </div>
+        </motion.section>
     )
 }

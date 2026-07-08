@@ -58,7 +58,7 @@ export default function Navbar({ cartCount, onCartClick }: CartProps) {
                  
                     <div className="flex gap-3">
                         <button
-                            className="relative hover:scale-120 transition-all duration-200 cursor-pointer"
+                            className="relative hover:scale-120 transition-all duration-200 cursor-pointer`"
                             onClick={onCartClick}
                             aria-label="View cart"
                         >

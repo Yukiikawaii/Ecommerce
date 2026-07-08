@@ -47,18 +47,18 @@ export default function CartDrawer({ isOpen, onClose, cart, onRemove, onUpdateQu
                                 <p className="text-sm font-medium line-clamp-1">{item.title}</p>
                                 <p className="text-purple-600 font-semibold text-sm">${item.price}</p>
 
-                                <div className="flex items-center gap-2 mt-1">
+                                <div className="flex items-center gap-2">
                                     <button onClick={() => onDecrease(item.id)}>
-                                        <Minus size={14} />
+                                        <Minus size={14} className="cursor-pointer" />
                                     </button>
                                     <span className="text-sm w-4 text-center">{item.quantity}</span>
                                     <button onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}>
-                                        <Plus size={14} />
+                                        <Plus size={14} className="cursor-pointer" />
                                     </button>
                                 </div>
                             </div>
                             <button onClick={() => onRemove(item.id)} aria-label="Remove item">
-                                <Trash2 size={18} className="text-gray-400 hover:text-red-500" />
+                                <Trash2 size={18} className="text-gray-400 hover:text-red-500 cursor-pointer" />
                             </button>
                         </div>
                     ))}
